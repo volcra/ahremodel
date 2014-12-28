@@ -1,4 +1,10 @@
+# Idea
+.idea/
+
+# Windows
+Thumbs.db
 *.zip
+*.ini
 
 # Sublime
 *sublime*
