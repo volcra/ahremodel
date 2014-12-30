@@ -8,3 +8,8 @@ Thumbs.db
 
 # Sublime
 *sublime*
+
+# Node
+node_modules/
+dist/
+.tmp/

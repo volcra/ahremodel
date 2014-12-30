@@ -1,0 +1,246 @@
+@charset "UTF-8";
+
+// http://paletton.com/#uid=10r0u0kcglL4Zvw8Eq6eXhmkwen
+// https://raw.githubusercontent.com/zurb/bower-foundation/master/scss/foundation/_functions.scss
+
+// RANGES
+// We use these functions to define ranges for various things, like media queries.
+@function lower-bound($range){
+  @if length($range) <= 0 {
+    @return 0;
+  }
+  @return nth($range,1);
+}
+
+@function upper-bound($range) {
+  @if length($range) < 2 {
+    @return 999999999999;
+  }
+  @return nth($range, 2);
+}
+
+// MIXINS
+@mixin cursive-font {
+    font-family: 'Marck Script', cursive;
+}
+
+// Screen sizes
+// Here we define the lower and upper bounds for each media size
+$small-range: (0em, 40em); /* 0, 640px */
+$medium-range: (40.063em, 64em); /* 641px, 1024px */
+$large-range: (64.063em, 90em); /* 1025px, 1440px */
+$xlarge-range: (90.063em, 120em); /* 1441px, 1920px */
+$xxlarge-range: (120.063em); /* 1921px */
+
+// Media Queries
+$screen: "only screen" !default;
+
+$landscape: "#{$screen} and (orientation: landscape)" !default;
+$portrait: "#{$screen} and (orientation: portrait)" !default;
+
+$small-up: $screen !default;
+$small-only: "#{$screen} and (max-width: #{upper-bound($small-range)})" !default;
+
+$medium-up: "#{$screen} and (min-width:#{lower-bound($medium-range)})" !default;
+$medium-only: "#{$screen} and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)})" !default;
+
+$large-up: "#{$screen} and (min-width:#{lower-bound($large-range)})" !default;
+$large-only: "#{$screen} and (min-width:#{lower-bound($large-range)}) and (max-width:#{upper-bound($large-range)})" !default;
+
+$xlarge-up: "#{$screen} and (min-width:#{lower-bound($xlarge-range)})" !default;
+$xlarge-only: "#{$screen} and (min-width:#{lower-bound($xlarge-range)}) and (max-width:#{upper-bound($xlarge-range)})" !default;
+
+$xxlarge-up: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)})" !default;
+$xxlarge-only: "#{$screen} and (min-width:#{lower-bound($xxlarge-range)}) and (max-width:#{upper-bound($xxlarge-range)})" !default;
+
+// colors
+$base-color: #AD876B;
+$primary-color: #FBE5D4;
+$secondary-color: #D0B098;
+$tertiary-color: #8A654A;
+$quaternary-color: #724829;
+$font-color: #333;
+
+body {
+    background-color: rgba($primary-color, 0.4);
+    font-weight: 400;
+    font-style: normal;
+    position: relative;
+    color: $font-color;
+
+    header {
+        width: 100%;
+        margin-bottom: 20px;
+        border-bottom: solid 2px $tertiary-color;
+        background-color: #6d6151;
+    }
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: $font-color;
+}
+
+.nav-wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: $tertiary-color;
+    box-shadow: 0 2px 5px 0 rgba(#222, 0.75);
+    position: relative;
+}
+
+footer.full-width {
+    text-align: center;
+    color: white;
+    background-color: $quaternary-color;
+    padding-top: 1.25rem;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, rgba($base-color, 0), rgba($base-color, 0.75), rgba($base-color, 0));
+    background-image: -moz-linear-gradient(left, rgba($base-color, 0), rgba($base-color, 0.75), rgba($base-color, 0));
+    background-image: -ms-linear-gradient(left, rgba($base-color, 0), rgba($base-color, 0.75), rgba($base-color, 0));
+    background-image: -o-linear-gradient(left, rgba($base-color, 0), rgba($base-color, 0.75), rgba($base-color, 0));
+    opacity: 0.8;
+}
+
+a, a:visited, a:hover, a:visited:hover {
+    transition: background 300ms linear;
+}
+
+section h2 {
+    @include cursive-font;
+}
+
+span.gc-cs-link {
+    color: white;
+}
+
+#contact-us .gc-cs-link {
+    color: $font-color;
+}
+
+.top-bar {
+    background: $tertiary-color;
+    max-width: 64rem;
+    margin: 0 auto;
+
+    .name h1 a {
+        @include cursive-font;
+        font-weight: 400;
+        font-size: 1.5rem;
+        color: #222;
+    }
+
+    @media #{$large-up} {
+        line-height: 70px;
+        height: 70px;
+        padding-top: 13px;
+
+        .name h1 a {
+            font-size: 2rem;
+        }
+    }
+}
+
+.top-bar.expanded {
+    .toggle-topbar a span::after {
+        box-shadow: 0 0 0 1px $base-color, 0 7px 0 1px $base-color, 0 14px 0 1px $base-color;
+    }
+
+    .title-area {
+        background: transparent;
+    }
+
+    .toggle-topbar a {
+        color: $base-color;
+    }
+}
+
+.top-bar-section {
+    .divider, & [role="separator"] {
+        border-top: none;
+    }
+
+    li:not(.has-form) a:not(.button):hover {
+        background: $quaternary-color;
+        color: $primary-color;
+    }
+
+    ul li, li:not(.has-form) a:not(.button) {
+        text-transform: uppercase;
+        background: $tertiary-color;
+        font-weight: 700;
+        color: #333;
+    }
+    & > ul > .divider, & > ul > [role="separator"] {
+        border-right: none;
+    }
+}
+
+.footer-up {
+    color: white;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    background-color: $tertiary-color;
+
+    .title {
+        border-bottom: 1px solid $secondary-color;
+        color: white;
+    }
+
+    a:not(.button), a:not(.button):hover, a:not(.button):hover {
+        color: white;
+    }
+}
+
+.hero {
+    min-height: 300px;
+    text-align: center;
+    padding-top: 10px;
+    background: url('../img/jumbotron_medium.jpg') no-repeat center center;
+    background-size: cover;
+    box-shadow: inset 0 0 0 500px rgba(black, 0.15);
+
+    h2, h3, p {
+        @include cursive-font;
+        color: white;
+    }
+
+    @media #{$medium-up} {
+        background: url('../img/jumbotron.jpg') no-repeat center center;
+    }
+
+    @media #{$large-up} {
+        min-height: 380px;
+        padding-top: 50px;
+
+        h2 {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+
+        h3 {
+           font-size: 2rem;
+        }
+    }
+}
+
+.black-box {
+    background-color: rgba(black, 0.2);
+    padding: 35px;
+    font-weight: 900;
+}
+
+.th {
+    box-shadow: 0 0 0 1px rgba($tertiary-color, 0.5);
+
+    &:hover, &:focus {
+        box-shadow: 0 0 6px 1px rgba($tertiary-color, 0.5);
+    }
+}
+
+.volcra {
+    margin-top: -8px;
+}
